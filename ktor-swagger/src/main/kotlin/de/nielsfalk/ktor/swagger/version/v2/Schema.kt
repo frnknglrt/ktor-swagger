@@ -36,8 +36,7 @@ class Swagger : CommonBase {
 
 class Response(
     override val description: String,
-    val schema: ModelOrModelReference? = null,
-    val produces: List<String>? = listOf("application/json")
+    val schema: ModelOrModelReference? = null
 ) : ResponseBase {
 
     companion object : ResponseCreator {
@@ -56,8 +55,7 @@ class Response(
                         description = when {
                             response.description != null -> response.description
                             else -> response.statusCode.description
-                        },
-                        produces = listOf(it.contentType.run { "$contentType/$contentSubtype" })
+                        }
                     )
                 }
             }
@@ -91,6 +89,7 @@ class Response(
     }
 }
 
+
 class Operation(
     override val responses: Map<HttpStatus, ResponseBase>,
     override val parameters: List<ParameterBase>,
@@ -99,7 +98,8 @@ class Operation(
     override val description: String?,
     override val security: List<Map<String, List<String>>>?,
     override val operationId: String?,
-    val consumes: List<String>?
+    val consumes: List<String>?,
+    val produces: List<String>? = listOf("application/json")
 ) : OperationBase {
 
     companion object : OperationCreator {
@@ -111,7 +111,8 @@ class Operation(
             description: String?,
             examples: Map<String, Example>,
             security: List<Map<String, List<String>>>?,
-            operationId: String?
+            operationId: String?,
+            produces: List<String>?
         ): OperationBase {
             val consumes = parameters.filter { it.`in` == ParameterInputType.body }.firstOrNull()?.let {
                 if ((it as Parameter).type == "string") listOf("text/plain")
@@ -126,7 +127,8 @@ class Operation(
                 description,
                 security,
                 operationId,
-                consumes
+                consumes,
+                produces
             )
         }
     }

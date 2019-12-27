@@ -260,14 +260,14 @@ class SwaggerTest {
     fun `swagger put toy operation with tag`() {
         val tags = swagger.paths.get(toysLocation)?.get("put")?.tags
 
-        tags?.map { it.name }.should.equal(listOf("toy"))
+        tags?.map { it }.should.equal(listOf("toy"))
     }
 
     @Test
     fun `openapi put toy operation with tag`() {
         val tags = openapi.paths.get(toysLocation)?.get("put")?.tags
 
-        tags?.map { it.name }.should.equal(listOf("toy"))
+        tags?.map { it }.should.equal(listOf("toy"))
     }
 
     @Test

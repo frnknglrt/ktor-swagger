@@ -46,7 +46,7 @@ val ApplicationCall.swaggerUi get() = application.swaggerUi
 val Application.swaggerUi get() = feature(SwaggerSupport)
 
 fun Group.toList(): List<Tag> {
-    return listOf(Tag(name))
+    return listOf(name)
 }
 
 internal class SpecVariation(
@@ -359,3 +359,4 @@ internal fun TypeInfo.modelName(): ModelName {
 private inline fun unsuportedType(type: Any?): Nothing {
     throw IllegalStateException("Unknown type ${type?.let { it::class }} $type")
 }
+
