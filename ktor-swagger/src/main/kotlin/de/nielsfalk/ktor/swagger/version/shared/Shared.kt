@@ -27,7 +27,6 @@ class Information(
     val contact: Contact? = null
 )
 
-
 typealias Tag = String
 
 class Contact(

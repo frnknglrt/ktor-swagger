@@ -103,7 +103,6 @@ class Response(
     }
 }
 
-
 class Operation(
     override val responses: Map<HttpStatus, ResponseBase>,
     override val parameters: List<ParameterBase>,

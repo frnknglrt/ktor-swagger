@@ -359,4 +359,3 @@ internal fun TypeInfo.modelName(): ModelName {
 private inline fun unsuportedType(type: Any?): Nothing {
     throw IllegalStateException("Unknown type ${type?.let { it::class }} $type")
 }
-

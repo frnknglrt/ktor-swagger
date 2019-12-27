@@ -198,10 +198,10 @@ private abstract class BaseWithVariation<B : CommonBase>(
             val produces = responses
                     .flatMap { it.responseTypes }
                     .filter { it is CustomContentTypeResponse }
-                    .map {(it as CustomContentTypeResponse).contentType.run { "$contentType/$contentSubtype" } }
+                    .map { (it as CustomContentTypeResponse).contentType.run { "$contentType/$contentSubtype" } }
                     .toMutableList()
 
-            if(produces.isEmpty())
+            if (produces.isEmpty())
                 produces.add("application/json")
 
             val responses = responses.map { codeResponse ->
