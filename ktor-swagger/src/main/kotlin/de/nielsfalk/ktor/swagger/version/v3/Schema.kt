@@ -211,7 +211,8 @@ class Operation(
             description: String?,
             examples: Map<String, Example>,
             security: List<Map<String, List<String>>>?,
-            operationId: String?
+            operationId: String?,
+            produces: List<String>?
         ): OperationBase {
             val bodyParams =
                 parameters

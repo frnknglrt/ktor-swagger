@@ -195,6 +195,15 @@ private abstract class BaseWithVariation<B : CommonBase>(
         }
 
         fun createOperation(): OperationBase {
+            val produces = responses
+                    .flatMap { it.responseTypes }
+                    .filter { it is CustomContentTypeResponse }
+                    .map {(it as CustomContentTypeResponse).contentType.run { "$contentType/$contentSubtype" } }
+                    .toMutableList()
+
+            if(produces.isEmpty())
+                produces.add("application/json")
+
             val responses = responses.map { codeResponse ->
                 codeResponse.responseTypes.forEach {
                     if (it is JsonResponseFromReflection) {
@@ -242,7 +251,8 @@ private abstract class BaseWithVariation<B : CommonBase>(
                 group,
                 method,
                 bodyExamples,
-                operationId
+                operationId,
+                produces
             )
         }
 
